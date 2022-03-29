@@ -1,0 +1,47 @@
+main:
+  random_seed: 123
+  train_size: .8
+features:
+  numeric:
+    - minimum_nights
+    - number_of_reviews
+    - reviews_per_month
+    - calculated_host_listings_count
+    - availability_365
+  categoric:
+    - neighbourhood_group
+    - neighbourhood
+    - room_type
+  geo:
+    - latitude
+    - longitude
+  text:
+    - name
+    - host_name
+
+modeling:
+  geo_radiuses_km:
+    - .05
+    - .1
+    - .2
+    - .5
+    - 1
+    - 2
+    - 4
+    - 7
+    - 10
+  text_transformer:
+    max_features: 1000
+    ngram_min: 1
+    ngram_max: 3
+  feature_selection:
+    model_name: RandomForestRegressor
+    module_model_name: sklearn.ensemble
+  model:
+    model_name: RandomForestRegressor
+    module_model_name: sklearn.ensemble
+    params:
+      n_estimators: 1000
+      max_depth: 7
+      n_jobs: -1
+      max_features: auto
